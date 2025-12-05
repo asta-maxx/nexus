@@ -1,0 +1,503 @@
+/* Dreamy Biological Theme - Neuro-Computing Page */
+
+#nexus-firewatch-page {
+    width: 100%;
+    font-family: 'Roboto', 'Inter', system-ui, sans-serif;
+    --bio-bg-deep: #0A1628;
+    --bio-bg-mid: #0F2139;
+    --bio-bg-card: #162B44;
+    --bio-teal: #00D4AA;
+    --bio-teal-light: #2AFFC8;
+    --bio-purple: #8B7FD3;
+    --bio-purple-light: #A99EE8;
+    --bio-pink: #E879C7;
+    --bio-blue: #4A9FFF;
+    --bio-text-light: #FFFFFF;
+    --bio-text-muted: #B4C6D9;
+    --bio-text-dim: #7A95B0;
+}
+
+/* Hero Section */
+#nexus-firewatch-page .fw-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 20px 80px;
+    overflow: hidden;
+    background: linear-gradient(180deg,
+            #0A1628 0%,
+            #0F2847 30%,
+            #1A3A5C 50%,
+            #0D3A4A 70%,
+            #0A1628 100%);
+}
+
+/* Floating cells/particles effect */
+#nexus-firewatch-page .fw-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, rgba(0, 212, 170, 0.4) 50%, transparent 50%),
+        radial-gradient(3px 3px at 30% 40%, rgba(139, 127, 211, 0.3) 50%, transparent 50%),
+        radial-gradient(2px 2px at 50% 60%, rgba(0, 212, 170, 0.3) 50%, transparent 50%),
+        radial-gradient(4px 4px at 70% 30%, rgba(232, 121, 199, 0.2) 50%, transparent 50%),
+        radial-gradient(2px 2px at 90% 70%, rgba(0, 212, 170, 0.4) 50%, transparent 50%),
+        radial-gradient(3px 3px at 20% 80%, rgba(139, 127, 211, 0.3) 50%, transparent 50%),
+        radial-gradient(2px 2px at 80% 90%, rgba(74, 159, 255, 0.3) 50%, transparent 50%);
+    animation: floatParticles 20s ease-in-out infinite;
+}
+
+@keyframes floatParticles {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-10px) translateX(5px);
+    }
+
+    50% {
+        transform: translateY(5px) translateX(-5px);
+    }
+
+    75% {
+        transform: translateY(-5px) translateX(10px);
+    }
+}
+
+#nexus-firewatch-page .fw-hero-bg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    pointer-events: none;
+}
+
+/* Neural wave patterns instead of mountains */
+#nexus-firewatch-page .fw-mountain {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+#nexus-firewatch-page .fw-mountain-1 {
+    height: 120px;
+    background: linear-gradient(180deg, rgba(0, 212, 170, 0.1) 0%, transparent 100%);
+    clip-path: polygon(0% 100%,
+            5% 60%, 10% 80%, 15% 50%, 20% 70%, 25% 40%, 30% 65%, 35% 35%, 40% 55%,
+            45% 30%, 50% 50%, 55% 25%, 60% 45%, 65% 30%, 70% 55%, 75% 40%, 80% 60%,
+            85% 45%, 90% 70%, 95% 50%, 100% 100%);
+    z-index: 3;
+}
+
+#nexus-firewatch-page .fw-mountain-2 {
+    height: 180px;
+    background: linear-gradient(180deg, rgba(139, 127, 211, 0.08) 0%, transparent 100%);
+    clip-path: polygon(0% 100%,
+            3% 70%, 8% 85%, 13% 60%, 18% 75%, 23% 50%, 28% 70%, 33% 45%, 38% 60%,
+            43% 40%, 48% 55%, 53% 35%, 58% 50%, 63% 40%, 68% 60%, 73% 50%, 78% 65%,
+            83% 55%, 88% 75%, 93% 60%, 100% 100%);
+    z-index: 2;
+}
+
+#nexus-firewatch-page .fw-mountain-3 {
+    height: 240px;
+    background: linear-gradient(180deg, rgba(74, 159, 255, 0.05) 0%, transparent 100%);
+    clip-path: polygon(0% 100%,
+            4% 75%, 9% 88%, 14% 65%, 19% 80%, 24% 55%, 29% 72%, 34% 48%, 39% 65%,
+            44% 45%, 49% 58%, 54% 38%, 59% 55%, 64% 42%, 69% 62%, 74% 52%, 79% 68%,
+            84% 58%, 89% 78%, 94% 62%, 100% 100%);
+    z-index: 1;
+}
+
+#nexus-firewatch-page .fw-hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 900px;
+    color: var(--bio-text-light);
+}
+
+#nexus-firewatch-page .fw-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: rgba(0, 212, 170, 0.15);
+    border: 1px solid var(--bio-teal);
+    color: var(--bio-teal);
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 30px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#nexus-firewatch-page .fw-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, var(--bio-text-light) 0%, var(--bio-teal-light) 50%, var(--bio-purple-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+#nexus-firewatch-page .fw-tagline {
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--bio-teal);
+}
+
+#nexus-firewatch-page .fw-subtitle {
+    font-size: 1.1rem;
+    color: var(--bio-text-muted);
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+#nexus-firewatch-page .fw-duration {
+    font-size: 1rem;
+    color: var(--bio-text-muted);
+    margin-bottom: 32px;
+}
+
+#nexus-firewatch-page .fw-cta-group {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#nexus-firewatch-page .fw-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+#nexus-firewatch-page .fw-btn-primary {
+    background: linear-gradient(135deg, var(--bio-teal) 0%, var(--bio-purple) 100%);
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 212, 170, 0.3);
+}
+
+#nexus-firewatch-page .fw-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(0, 212, 170, 0.4);
+}
+
+#nexus-firewatch-page .fw-btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(0, 212, 170, 0.4);
+    color: var(--bio-teal);
+}
+
+#nexus-firewatch-page .fw-btn-secondary:hover {
+    background: rgba(0, 212, 170, 0.1);
+    border-color: var(--bio-teal);
+}
+
+#nexus-firewatch-page .fw-btn-lg {
+    padding: 18px 48px;
+    font-size: 1.2rem;
+}
+
+/* Sections */
+#nexus-firewatch-page .fw-section {
+    padding: 80px 20px;
+}
+
+#nexus-firewatch-page .fw-section-dark {
+    background: var(--bio-bg-deep);
+    color: var(--bio-text-light);
+}
+
+#nexus-firewatch-page .fw-section-alt {
+    background: var(--bio-bg-mid);
+    color: var(--bio-text-light);
+}
+
+#nexus-firewatch-page .fw-container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+#nexus-firewatch-page .fw-section-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+#nexus-firewatch-page .fw-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 16px;
+}
+
+#nexus-firewatch-page .fw-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.15) 0%, rgba(139, 127, 211, 0.15) 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(0, 212, 170, 0.2);
+}
+
+#nexus-firewatch-page .fw-section-header h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--bio-text-light) 0%, var(--bio-teal-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#nexus-firewatch-page .fw-focus {
+    color: var(--bio-purple-light);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Problem Box */
+#nexus-firewatch-page .fw-problem-box {
+    background: linear-gradient(135deg, rgba(0, 212, 170, 0.05) 0%, rgba(139, 127, 211, 0.05) 100%);
+    border: 1px solid rgba(0, 212, 170, 0.2);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 48px;
+}
+
+#nexus-firewatch-page .fw-problem-box h3 {
+    color: var(--bio-teal);
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+}
+
+#nexus-firewatch-page .fw-problem-box p {
+    color: var(--bio-text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+#nexus-firewatch-page .fw-mission {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--bio-teal);
+    color: var(--bio-text-light);
+}
+
+#nexus-firewatch-page .fw-squad-title {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    color: var(--bio-text-light);
+}
+
+/* Cards Grid */
+#nexus-firewatch-page .fw-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+#nexus-firewatch-page .fw-card {
+    background: linear-gradient(145deg, var(--bio-bg-card) 0%, rgba(22, 43, 68, 0.8) 100%);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 212, 170, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+#nexus-firewatch-page .fw-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 212, 170, 0.15);
+    border-color: rgba(0, 212, 170, 0.3);
+}
+
+#nexus-firewatch-page .fw-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+#nexus-firewatch-page .fw-role-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--bio-teal) 0%, var(--bio-purple) 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+#nexus-firewatch-page .fw-card h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--bio-text-light);
+    margin: 0 0 4px 0;
+}
+
+#nexus-firewatch-page .fw-nickname {
+    color: var(--bio-teal);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+#nexus-firewatch-page .fw-challenge {
+    color: var(--bio-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+#nexus-firewatch-page .fw-card h5 {
+    font-size: 0.9rem;
+    color: var(--bio-text-dim);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#nexus-firewatch-page .fw-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#nexus-firewatch-page .fw-card li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+    color: var(--bio-text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+#nexus-firewatch-page .fw-card li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--bio-teal);
+    font-size: 0.6rem;
+    top: 5px;
+}
+
+/* Prerequisites */
+#nexus-firewatch-page .fw-prereq-list {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#nexus-firewatch-page .fw-prereq-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px;
+    background: linear-gradient(145deg, var(--bio-bg-card) 0%, rgba(22, 43, 68, 0.8) 100%);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(0, 212, 170, 0.1);
+}
+
+#nexus-firewatch-page .fw-prereq-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--bio-teal) 0%, var(--bio-purple) 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 1.3rem;
+    border-radius: 14px;
+    flex-shrink: 0;
+}
+
+#nexus-firewatch-page .fw-prereq-item>div {
+    color: var(--bio-text-muted);
+    line-height: 1.6;
+}
+
+/* Final CTA */
+#nexus-firewatch-page .fw-cta-section {
+    background: linear-gradient(180deg,
+            var(--bio-bg-deep) 0%,
+            var(--bio-bg-mid) 50%,
+            rgba(0, 212, 170, 0.1) 100%);
+    text-align: center;
+    padding: 100px 20px;
+}
+
+#nexus-firewatch-page .fw-cta-final h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 16px;
+    background: linear-gradient(135deg, var(--bio-text-light) 0%, var(--bio-teal-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#nexus-firewatch-page .fw-cta-final p {
+    font-size: 1.2rem;
+    color: var(--bio-text-muted);
+    margin-bottom: 32px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #nexus-firewatch-page .fw-hero {
+        padding: 100px 16px 60px;
+        min-height: auto;
+    }
+
+    #nexus-firewatch-page .fw-section {
+        padding: 60px 16px;
+    }
+
+    #nexus-firewatch-page .fw-problem-box {
+        padding: 24px;
+    }
+
+    #nexus-firewatch-page .fw-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #nexus-firewatch-page .fw-prereq-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #nexus-firewatch-page .fw-cta-group {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #nexus-firewatch-page .fw-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
