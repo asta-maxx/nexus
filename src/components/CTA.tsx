@@ -24,23 +24,18 @@ function CTA() {
             <div className="text-left">
               <h3 className="text-lg font-bold text-gray-900 mb-2">Important Note</h3>
               <p className="text-gray-700">
-                The registration form link will be activated and shared via official department channels.
-                Please check your college email for updates and the registration URL.
+                After registrations please check your mail for updates.
               </p>
             </div>
           </div>
 
           <a
-            href="#FORM_LINK_PLACEHOLDER"
+            href="https://forms.gle/QWQW2rrqDpexe9vr6"
             className="inline-flex items-center justify-center bg-gradient-to-r from-blue-600 to-green-500 text-white px-8 py-4 rounded-xl text-lg font-bold hover:shadow-xl transition-all transform hover:-translate-y-0.5 w-full sm:w-auto"
           >
             <Rocket className="w-6 h-6 mr-2" />
             Access the Registration Form
           </a>
-
-          <p className="text-sm text-gray-500 mt-4">
-            Link will be activated soon. Stay tuned to official communications.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-white">

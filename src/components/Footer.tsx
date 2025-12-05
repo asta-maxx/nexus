@@ -7,7 +7,11 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <Cpu className="w-10 h-10 text-blue-400" />
+              <img 
+  src="/images/logo.png"
+  alt="Logo"
+  className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto object-contain"
+ />
               <div>
                 <h3 className="text-xl font-bold text-white">NEXUS Club</h3>
                 <p className="text-sm text-gray-400">Google AI Innovation Lab</p>
