@@ -3,6 +3,7 @@
 #nexus-firewatch-page {
     width: 100%;
     font-family: 'Roboto', 'Inter', system-ui, sans-serif;
+    position: relative;
     --bio-bg-deep: #0A1628;
     --bio-bg-mid: #0F2139;
     --bio-bg-card: #162B44;
@@ -12,9 +13,46 @@
     --bio-purple-light: #A99EE8;
     --bio-pink: #E879C7;
     --bio-blue: #4A9FFF;
+    --bio-sakura: #FFB7C5;
+    --bio-sakura-light: #FFC8D3;
     --bio-text-light: #FFFFFF;
     --bio-text-muted: #B4C6D9;
     --bio-text-dim: #7A95B0;
+}
+
+/* ========== GLOBAL BACKGROUND LAYER ========== */
+.global-bio-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.global-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.synapse-svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Make sections appear above background */
+#nexus-firewatch-page .fw-hero,
+#nexus-firewatch-page .fw-section,
+#nexus-firewatch-page .fw-cta-section {
+    position: relative;
+    z-index: 2;
 }
 
 /* Hero Section */
@@ -69,6 +107,276 @@
         transform: translateY(-5px) translateX(10px);
     }
 }
+
+/* Sakura/Cherry Blossom Petals Animation - More Subtle */
+@keyframes sakuraFall {
+    0% {
+        transform: translateY(-5vh) translateX(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.6;
+    }
+
+    95% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(105vh) translateX(50px) rotate(360deg) scale(0.9);
+        opacity: 0;
+    }
+}
+
+@keyframes sakuraSway {
+
+    0%,
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    25% {
+        transform: translateX(15px) rotate(5deg);
+    }
+
+    75% {
+        transform: translateX(-10px) rotate(-3deg);
+    }
+}
+
+@keyframes dnaFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.08;
+    }
+
+    50% {
+        transform: translateY(-15px);
+        opacity: 0.12;
+    }
+}
+
+@keyframes neuronPulse {
+
+    0%,
+    100% {
+        opacity: 0.15;
+        filter: blur(0px);
+    }
+
+    50% {
+        opacity: 0.35;
+        filter: blur(1px);
+    }
+}
+
+@keyframes synapseFlow {
+    0% {
+        stroke-dashoffset: 100;
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.4;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes cellDrift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.15;
+    }
+
+    33% {
+        transform: translate(8px, -12px) scale(1.02);
+        opacity: 0.22;
+    }
+
+    66% {
+        transform: translate(-5px, -8px) scale(0.98);
+        opacity: 0.18;
+    }
+}
+
+/* Professional Sakura Petal Styles */
+.sakura-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.sakura-petal {
+    position: absolute;
+    background: radial-gradient(ellipse at 40% 40%,
+            rgba(255, 220, 230, 0.9),
+            rgba(255, 183, 197, 0.7) 50%,
+            rgba(255, 160, 180, 0.5) 100%);
+    border-radius: 50% 0 50% 50%;
+    opacity: 0;
+    animation: sakuraFall linear infinite, sakuraSway ease-in-out infinite;
+    filter: blur(0.5px);
+    box-shadow:
+        inset 0 0 4px rgba(255, 255, 255, 0.4),
+        0 2px 8px rgba(255, 183, 197, 0.3);
+}
+
+.sakura-petal::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 40%;
+    height: 40%;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+/* DNA Helix - Scientific Style */
+.dna-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+    perspective: 1000px;
+}
+
+.dna-helix {
+    position: absolute;
+    width: 80px;
+    height: 400px;
+    animation: dnaFloat 12s ease-in-out infinite;
+}
+
+.dna-strand-group {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+/* Neural Network - Professional Scientific Visualization */
+.neural-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.neuron-soma {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+            rgba(0, 212, 170, 0.4) 0%,
+            rgba(0, 180, 150, 0.2) 40%,
+            rgba(0, 150, 130, 0.1) 70%,
+            transparent 100%);
+    animation: neuronPulse 4s ease-in-out infinite;
+    box-shadow:
+        0 0 20px rgba(0, 212, 170, 0.15),
+        inset 0 0 10px rgba(0, 212, 170, 0.1);
+}
+
+.neuron-soma::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    height: 30%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(139, 127, 211, 0.5), transparent);
+    border-radius: 50%;
+}
+
+.synapse-line {
+    stroke-dasharray: 100;
+    animation: synapseFlow 6s ease-in-out infinite;
+}
+
+/* Floating Cells - Realistic Biology */
+.cell-container {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 4;
+}
+
+.bio-cell {
+    position: absolute;
+    border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%;
+    background: radial-gradient(ellipse at 35% 35%,
+            rgba(139, 127, 211, 0.15) 0%,
+            rgba(100, 90, 180, 0.08) 30%,
+            rgba(0, 212, 170, 0.05) 60%,
+            transparent 100%);
+    border: 1px solid rgba(0, 212, 170, 0.1);
+    animation: cellDrift ease-in-out infinite;
+    backdrop-filter: blur(1px);
+}
+
+.bio-cell::before {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 25%;
+    height: 25%;
+    background: radial-gradient(circle,
+            rgba(139, 127, 211, 0.4) 0%,
+            rgba(139, 127, 211, 0.2) 50%,
+            transparent 100%);
+    border-radius: 45% 55% 50% 50%;
+    border: 1px solid rgba(139, 127, 211, 0.15);
+}
+
+.bio-cell::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 15%;
+    height: 8%;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    filter: blur(2px);
+}
+
+/* Molecular Structure Overlay */
+.molecular-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(0, 212, 170, 1) 1px, transparent 1px),
+        radial-gradient(circle at 40% 60%, rgba(139, 127, 211, 1) 1px, transparent 1px),
+        radial-gradient(circle at 60% 20%, rgba(0, 212, 170, 1) 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, rgba(139, 127, 211, 1) 1px, transparent 1px);
+    background-size: 150px 150px;
+}
+
+
 
 #nexus-firewatch-page .fw-hero-bg {
     position: absolute;

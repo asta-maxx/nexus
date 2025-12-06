@@ -78,9 +78,9 @@ function TeamsPage() {
             image: '/images/core/Team/5.jpg',
             skills: ['Photography', 'Videography', 'Adobe Suite'],
             bio: 'Creative visual specialist with professional experience in photography, videography, and digital content creation.',
-            portfolio: 'sites.google.com/view/cinelinestudio',
-            github: '#',
-            linkedin: 'https://github.com/nikilkumarm',
+            portfolio: 'https://sites.google.com/view/cinelinestudio',
+            github: 'https://github.com/nikilkumarm',
+            linkedin: 'https://www.linkedin.com/in/nikilkumarm/',
         },
         {
             name: 'David Paul P',

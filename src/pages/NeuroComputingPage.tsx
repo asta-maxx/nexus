@@ -1,9 +1,126 @@
+import { useMemo } from 'react';
 import './NeuroComputingPage.css';
 import { Cpu, Brain, Zap, Users } from 'lucide-react';
 
+// Generate subtle sakura petals
+function generateSakuraPetals(count: number) {
+    return Array.from({ length: count }, (_, i) => ({
+        id: i,
+        left: `${5 + Math.random() * 90}%`,
+        size: 6 + Math.random() * 6,
+        delay: Math.random() * 25,
+        duration: 18 + Math.random() * 12,
+        swayDuration: 4 + Math.random() * 3,
+    }));
+}
+
+// Generate professional neuron somas
+function generateNeurons(count: number) {
+    return Array.from({ length: count }, (_, i) => ({
+        id: i,
+        left: `${5 + Math.random() * 90}%`,
+        top: `${Math.random() * 100}%`,
+        delay: Math.random() * 6,
+        size: 15 + Math.random() * 25,
+    }));
+}
+
+// Generate subtle floating cells
+function generateCells(count: number) {
+    return Array.from({ length: count }, (_, i) => ({
+        id: i,
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        size: 30 + Math.random() * 50,
+        delay: Math.random() * 10,
+        duration: 12 + Math.random() * 8,
+    }));
+}
+
 function NeuroComputingPage() {
+    const sakuraPetals = useMemo(() => generateSakuraPetals(25), []);
+    const neurons = useMemo(() => generateNeurons(20), []);
+    const bioCells = useMemo(() => generateCells(12), []);
+
     return (
         <div id="nexus-firewatch-page">
+            {/* Global Background Layer */}
+            <div className="global-bio-bg">
+                <div className="molecular-overlay" />
+
+                <div className="sakura-container global-layer">
+                    {sakuraPetals.map((petal) => (
+                        <div
+                            key={petal.id}
+                            className="sakura-petal"
+                            style={{
+                                left: petal.left,
+                                width: petal.size,
+                                height: petal.size,
+                                animationDelay: `${petal.delay}s, 0s`,
+                                animationDuration: `${petal.duration}s, ${petal.swayDuration}s`,
+                            }}
+                        />
+                    ))}
+                </div>
+
+                <div className="neural-container global-layer">
+                    {neurons.map((neuron) => (
+                        <div
+                            key={neuron.id}
+                            className="neuron-soma"
+                            style={{
+                                left: neuron.left,
+                                top: neuron.top,
+                                width: neuron.size,
+                                height: neuron.size,
+                                animationDelay: `${neuron.delay}s`,
+                            }}
+                        />
+                    ))}
+                    <svg className="synapse-svg">
+                        <defs>
+                            <linearGradient id="synapseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="rgba(0, 212, 170, 0)" />
+                                <stop offset="50%" stopColor="rgba(0, 212, 170, 0.25)" />
+                                <stop offset="100%" stopColor="rgba(0, 212, 170, 0)" />
+                            </linearGradient>
+                            <linearGradient id="synapseGradPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stopColor="rgba(139, 127, 211, 0)" />
+                                <stop offset="50%" stopColor="rgba(139, 127, 211, 0.2)" />
+                                <stop offset="100%" stopColor="rgba(139, 127, 211, 0)" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 5% 8% Q 15% 5%, 25% 12%" fill="none" stroke="url(#synapseGrad)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '0s' }} />
+                        <path d="M 25% 12% Q 40% 18%, 50% 10%" fill="none" stroke="url(#synapseGrad)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '1s' }} />
+                        <path d="M 70% 5% Q 80% 12%, 92% 8%" fill="none" stroke="url(#synapseGrad)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '2s' }} />
+                        <path d="M 8% 35% Q 20% 40%, 35% 32%" fill="none" stroke="url(#synapseGradPurple)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '3s' }} />
+                        <path d="M 60% 38% Q 75% 45%, 88% 35%" fill="none" stroke="url(#synapseGradPurple)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '4s' }} />
+                        <path d="M 10% 65% Q 25% 72%, 40% 62%" fill="none" stroke="url(#synapseGrad)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '5s' }} />
+                        <path d="M 55% 70% Q 70% 65%, 85% 75%" fill="none" stroke="url(#synapseGrad)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '6s' }} />
+                        <path d="M 15% 88% Q 35% 92%, 50% 85%" fill="none" stroke="url(#synapseGradPurple)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '7s' }} />
+                        <path d="M 65% 90% Q 78% 85%, 92% 92%" fill="none" stroke="url(#synapseGradPurple)" strokeWidth="1" className="synapse-line" style={{ animationDelay: '8s' }} />
+                    </svg>
+                </div>
+
+                <div className="cell-container global-layer">
+                    {bioCells.map((cell) => (
+                        <div
+                            key={cell.id}
+                            className="bio-cell"
+                            style={{
+                                left: cell.left,
+                                top: cell.top,
+                                width: cell.size,
+                                height: cell.size,
+                                animationDelay: `${cell.delay}s`,
+                                animationDuration: `${cell.duration}s`,
+                            }}
+                        />
+                    ))}
+                </div>
+            </div>
+
             {/* Hero Section */}
             <section className="fw-hero">
                 <div className="fw-hero-bg">
@@ -24,7 +141,7 @@ function NeuroComputingPage() {
                         NEXUS is recruiting <strong>2 passionate teams</strong> to work on exciting research projects in Brain-Computer Interfacing (BCI).
                     </p>
                     <p className="fw-subtitle" style={{ marginBottom: '8px' }}>
-                        <strong>Open to:</strong> 2nd Year & 3rd Year Students
+                        <strong>Open to:</strong> 2nd &amp; 3rd Year CSE and Biotech Students
                     </p>
                     <p className="fw-duration">
                         <strong>Duration:</strong> Jan 2026 – April 2026 (Intensive Capstone)
@@ -76,7 +193,7 @@ function NeuroComputingPage() {
                             <h5>What helps:</h5>
                             <ul>
                                 <li>Familiarity with <strong>Python (NumPy, Pandas, Scikit-learn)</strong>.</li>
-                                <li>Interest in <strong>Matrix Operations</strong> (we'll teach CSP filtering!).</li>
+                                <li>Interest in <strong>Matrix Operations</strong> (we'll explore CSP filtering together!).</li>
                                 <li>Willingness to read IEEE papers and learn to convert math to code.</li>
                             </ul>
                         </div>
@@ -215,7 +332,7 @@ function NeuroComputingPage() {
                         <div className="fw-prereq-item">
                             <span className="fw-prereq-num">2</span>
                             <div>
-                                <strong>Version Control:</strong> Basic knowledge of <strong>Git/GitHub</strong> is expected. Don't worry if you're still learning — we'll help you get up to speed!
+                                <strong>Version Control:</strong> Basic knowledge of <strong>Git/GitHub</strong> is expected. Don't worry if you're still learning — we'll figure it out together!
                             </div>
                         </div>
                         <div className="fw-prereq-item">
@@ -242,7 +359,7 @@ function NeuroComputingPage() {
                         </a>
                     </div>
                     <p style={{ marginTop: '16px', fontSize: '0.9rem', opacity: 0.7 }}>
-                        Open to 2nd & 3rd Year Students
+                        Open to 2nd & 3rd Year CSE and Biotech Students
                     </p>
                 </div>
             </section>
