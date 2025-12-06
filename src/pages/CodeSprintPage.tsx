@@ -8,6 +8,59 @@ interface TimeLeft {
     seconds: number;
 }
 
+// Glitch text effect component - Valorant style
+function GlitchText({ text, className = '' }: { text: string; className?: string }) {
+    const [displayText, setDisplayText] = useState(text);
+    const [isGlitching, setIsGlitching] = useState(false);
+
+    useEffect(() => {
+        const glitchChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%&*';
+
+        const triggerGlitch = () => {
+            setIsGlitching(true);
+            let iterations = 0;
+
+            const glitchInterval = setInterval(() => {
+                setDisplayText(
+                    text
+                        .split('')
+                        .map((char, index) => {
+                            if (char === ' ') return ' ';
+                            if (index < iterations) return text[index];
+                            return glitchChars[Math.floor(Math.random() * glitchChars.length)];
+                        })
+                        .join('')
+                );
+
+                iterations += 1;
+                if (iterations > text.length) {
+                    clearInterval(glitchInterval);
+                    setDisplayText(text);
+                    setIsGlitching(false);
+                }
+            }, 40);
+        };
+
+        // Initial glitch
+        triggerGlitch();
+
+        // Random glitch every 4-8 seconds
+        const randomGlitch = setInterval(() => {
+            if (Math.random() > 0.5) {
+                triggerGlitch();
+            }
+        }, 4000 + Math.random() * 4000);
+
+        return () => clearInterval(randomGlitch);
+    }, [text]);
+
+    return (
+        <span className={`${className} ${isGlitching ? 'glitch-active' : ''}`}>
+            {displayText}
+        </span>
+    );
+}
+
 // Fake leaderboard data for the blurred background
 const mockLeaderboard = [
     { rank: 1, player: 'ShadowKill3r', points: 2847, streak: 15, kd: '3.2' },
@@ -25,6 +78,7 @@ const mockLeaderboard = [
 function CodeSprintPage() {
     const [timeLeft, setTimeLeft] = useState<TimeLeft>({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [isLive, setIsLive] = useState(false);
+    const [showGlitchOverlay, setShowGlitchOverlay] = useState(false);
 
     // Target date: January 1, 2026
     const targetDate = new Date('2026-01-01T00:00:00').getTime();
@@ -54,11 +108,124 @@ function CodeSprintPage() {
         return () => clearInterval(timer);
     }, [targetDate]);
 
+    // Random glitch overlay effect
+    useEffect(() => {
+        const glitchInterval = setInterval(() => {
+            if (Math.random() > 0.7) {
+                setShowGlitchOverlay(true);
+                setTimeout(() => setShowGlitchOverlay(false), 150);
+            }
+        }, 3000);
+
+        return () => clearInterval(glitchInterval);
+    }, []);
+
     // Registration form URL - replace with your Google Form
     const registrationFormUrl = 'https://forms.google.com/your-form-id';
 
     return (
         <div className="min-h-screen relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #050812 0%, #0a1628 50%, #050812 100%)' }}>
+            {/* Glitch CSS Styles */}
+            <style>{`
+                @keyframes scanline {
+                    0% { transform: translateY(-100%); }
+                    100% { transform: translateY(100vh); }
+                }
+                
+                @keyframes glitch-anim {
+                    0% { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 2px); }
+                    20% { clip-path: inset(92% 0 1% 0); transform: translate(2px, -2px); }
+                    40% { clip-path: inset(43% 0 1% 0); transform: translate(-2px, 2px); }
+                    60% { clip-path: inset(25% 0 58% 0); transform: translate(2px, -2px); }
+                    80% { clip-path: inset(54% 0 7% 0); transform: translate(-2px, 2px); }
+                    100% { clip-path: inset(58% 0 43% 0); transform: translate(2px, -2px); }
+                }
+                
+                @keyframes glitch-anim-2 {
+                    0% { clip-path: inset(65% 0 25% 0); transform: translate(2px, -2px); }
+                    20% { clip-path: inset(10% 0 85% 0); transform: translate(-2px, 2px); }
+                    40% { clip-path: inset(50% 0 30% 0); transform: translate(2px, -2px); }
+                    60% { clip-path: inset(70% 0 15% 0); transform: translate(-2px, 2px); }
+                    80% { clip-path: inset(20% 0 65% 0); transform: translate(2px, -2px); }
+                    100% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
+                }
+                
+                @keyframes chromatic-shift {
+                    0%, 100% { text-shadow: -2px 0 #ff4655, 2px 0 #00f0ff; }
+                    25% { text-shadow: 2px 0 #ff4655, -2px 0 #00f0ff; }
+                    50% { text-shadow: -1px 0 #ff4655, 1px 0 #00f0ff; }
+                    75% { text-shadow: 1px 0 #ff4655, -1px 0 #00f0ff; }
+                }
+                
+                @keyframes flicker {
+                    0%, 100% { opacity: 1; }
+                    92% { opacity: 1; }
+                    93% { opacity: 0.3; }
+                    94% { opacity: 1; }
+                    95% { opacity: 0.5; }
+                    96% { opacity: 1; }
+                }
+                
+                .glitch-title {
+                    position: relative;
+                    animation: flicker 4s infinite;
+                }
+                
+                .glitch-title::before,
+                .glitch-title::after {
+                    content: attr(data-text);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    opacity: 0;
+                }
+                
+                .glitch-title:hover::before {
+                    opacity: 0.8;
+                    color: #ff4655;
+                    animation: glitch-anim 0.3s infinite;
+                    z-index: -1;
+                }
+                
+                .glitch-title:hover::after {
+                    opacity: 0.8;
+                    color: #00f0ff;
+                    animation: glitch-anim-2 0.3s infinite;
+                    z-index: -1;
+                }
+                
+                .glitch-title:hover {
+                    animation: chromatic-shift 0.1s infinite;
+                }
+                
+                .scan-glitch {
+                    animation: scanline 3s linear infinite;
+                }
+                
+                .glitch-active {
+                    animation: chromatic-shift 0.1s infinite;
+                }
+                
+                @keyframes noise {
+                    0%, 100% { transform: translate(0, 0); }
+                    10% { transform: translate(-5%, -5%); }
+                    20% { transform: translate(5%, 5%); }
+                    30% { transform: translate(-5%, 5%); }
+                    40% { transform: translate(5%, -5%); }
+                    50% { transform: translate(-5%, 0); }
+                    60% { transform: translate(5%, 0); }
+                    70% { transform: translate(0, 5%); }
+                    80% { transform: translate(0, -5%); }
+                    90% { transform: translate(5%, 5%); }
+                }
+                
+                .glitch-overlay {
+                    animation: noise 0.15s infinite;
+                }
+            `}</style>
+
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 {/* Grid pattern */}
@@ -70,6 +237,23 @@ function CodeSprintPage() {
                             linear-gradient(90deg, rgba(0, 240, 255, 0.3) 1px, transparent 1px)
                         `,
                         backgroundSize: '50px 50px',
+                    }}
+                />
+
+                {/* Scanlines overlay */}
+                <div
+                    className="absolute inset-0 opacity-[0.04]"
+                    style={{
+                        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 240, 255, 0.1) 2px, rgba(0, 240, 255, 0.1) 4px)',
+                    }}
+                />
+
+                {/* Moving scan line */}
+                <div
+                    className="absolute left-0 right-0 h-[2px] scan-glitch"
+                    style={{
+                        background: 'linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.5), rgba(255, 70, 85, 0.5), transparent)',
+                        boxShadow: '0 0 20px rgba(0, 240, 255, 0.5)',
                     }}
                 />
 
@@ -90,6 +274,17 @@ function CodeSprintPage() {
                 <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-[100px] animate-pulse" />
                 <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
+
+            {/* Glitch Overlay Effect */}
+            {showGlitchOverlay && (
+                <div className="fixed inset-0 z-50 pointer-events-none glitch-overlay">
+                    <div className="absolute inset-0 bg-red-500/10" style={{ clipPath: 'inset(30% 0 60% 0)' }} />
+                    <div className="absolute inset-0 bg-cyan-500/10" style={{ clipPath: 'inset(60% 0 20% 0)' }} />
+                    <div className="absolute inset-0" style={{
+                        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)',
+                    }} />
+                </div>
+            )}
 
             {/* Main content */}
             <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
@@ -180,7 +375,7 @@ function CodeSprintPage() {
                                 style={{ clipPath: 'polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)' }}
                             >
                                 <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-red-400 animate-pulse'}`} />
-                                {isLive ? 'LIVE NOW' : 'STARTING SOON'}
+                                <GlitchText text={isLive ? 'LIVE NOW' : 'STARTING SOON'} />
                             </div>
                         </div>
 
@@ -191,12 +386,17 @@ function CodeSprintPage() {
                                 <Trophy className="w-6 h-6 text-yellow-500" />
                                 <div className="w-12 h-[2px] bg-gradient-to-l from-transparent to-cyan-500" />
                             </div>
-                            <h1 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tight">
+                            <h1
+                                className="glitch-title text-3xl md:text-4xl font-black text-white uppercase tracking-tight"
+                                data-text="#NexusCodeSprint"
+                            >
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-white to-cyan-400">
                                     #NexusCodeSprint
                                 </span>
                             </h1>
-                            <p className="text-lg text-cyan-400 font-semibold mt-1">LEADERBOARD</p>
+                            <p className="text-lg text-cyan-400 font-semibold mt-1">
+                                <GlitchText text="LEADERBOARD" className="tracking-widest" />
+                            </p>
                         </div>
 
                         {/* Description */}
@@ -259,12 +459,12 @@ function CodeSprintPage() {
                                     {isLive ? (
                                         <>
                                             <Target className="w-5 h-5" />
-                                            VIEW LEADERBOARD
+                                            <GlitchText text="VIEW LEADERBOARD" />
                                         </>
                                     ) : (
                                         <>
                                             <Zap className="w-5 h-5" />
-                                            REGISTER NOW
+                                            <GlitchText text="REGISTER NOW" />
                                             <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
@@ -284,7 +484,9 @@ function CodeSprintPage() {
                 {/* Bottom decorative element */}
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
                     <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-red-500/50" />
-                    <div className="text-gray-600 text-xs font-mono uppercase tracking-widest">NEXUS // 2026</div>
+                    <div className="text-gray-600 text-xs font-mono uppercase tracking-widest">
+                        <GlitchText text="NEXUS // 2026" />
+                    </div>
                     <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-cyan-500/50" />
                 </div>
             </div>
@@ -293,3 +495,4 @@ function CodeSprintPage() {
 }
 
 export default CodeSprintPage;
+
