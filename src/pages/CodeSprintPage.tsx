@@ -264,15 +264,15 @@ function CodeSprintPage() {
                     <div className="absolute top-[70%] left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-cyan-500/20 to-transparent transform -rotate-3" />
                 </div>
 
-                {/* Corner decorations */}
-                <div className="absolute top-4 left-4 w-20 h-20 border-l-2 border-t-2 border-cyan-500/30" />
-                <div className="absolute top-4 right-4 w-20 h-20 border-r-2 border-t-2 border-red-500/30" />
-                <div className="absolute bottom-4 left-4 w-20 h-20 border-l-2 border-b-2 border-red-500/30" />
-                <div className="absolute bottom-4 right-4 w-20 h-20 border-r-2 border-b-2 border-cyan-500/30" />
+                {/* Corner decorations - hide on very small screens */}
+                <div className="absolute top-2 left-2 sm:top-4 sm:left-4 w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 border-l-2 border-t-2 border-cyan-500/30" />
+                <div className="absolute top-2 right-2 sm:top-4 sm:right-4 w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 border-r-2 border-t-2 border-red-500/30" />
+                <div className="absolute bottom-2 left-2 sm:bottom-4 sm:left-4 w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 border-l-2 border-b-2 border-red-500/30" />
+                <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 w-10 h-10 sm:w-16 md:w-20 sm:h-16 md:h-20 border-r-2 border-b-2 border-cyan-500/30" />
 
-                {/* Glowing orbs */}
-                <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-red-500/10 rounded-full blur-[100px] animate-pulse" />
-                <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+                {/* Glowing orbs - smaller on mobile */}
+                <div className="absolute top-1/4 right-1/4 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-red-500/10 rounded-full blur-[60px] sm:blur-[80px] md:blur-[100px] animate-pulse" />
+                <div className="absolute bottom-1/4 left-1/4 w-32 sm:w-48 md:w-64 h-32 sm:h-48 md:h-64 bg-cyan-500/10 rounded-full blur-[60px] sm:blur-[80px] md:blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
 
             {/* Glitch Overlay Effect */}
@@ -287,10 +287,10 @@ function CodeSprintPage() {
             )}
 
             {/* Main content */}
-            <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20">
+            <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-3 sm:px-4 py-16 sm:py-20">
 
-                {/* Blurred Leaderboard Background */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                {/* Blurred Leaderboard Background - hidden on mobile for performance */}
+                <div className="absolute inset-0 hidden md:flex items-center justify-center pointer-events-none">
                     <div
                         className={`w-full max-w-4xl mx-4 transition-all duration-1000 ${isLive ? 'blur-none opacity-100' : 'blur-md opacity-30'}`}
                         style={{ filter: isLive ? 'none' : 'blur(8px) saturate(0.5)' }}
@@ -333,10 +333,10 @@ function CodeSprintPage() {
 
                 {/* Overlay Card */}
                 <div
-                    className="relative z-20 w-full max-w-xl mx-auto"
+                    className="relative z-20 w-full max-w-[calc(100%-1rem)] sm:max-w-md md:max-w-xl mx-auto"
                     style={{
                         background: 'linear-gradient(145deg, rgba(10, 20, 40, 0.95) 0%, rgba(5, 10, 25, 0.98) 100%)',
-                        clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)',
+                        clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
                     }}
                 >
                     {/* Card border glow */}
@@ -344,7 +344,7 @@ function CodeSprintPage() {
                         className="absolute inset-0 opacity-60"
                         style={{
                             background: 'linear-gradient(145deg, rgba(255, 70, 85, 0.3) 0%, transparent 30%, transparent 70%, rgba(0, 240, 255, 0.3) 100%)',
-                            clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)',
+                            clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
                         }}
                     />
 
@@ -353,81 +353,81 @@ function CodeSprintPage() {
                         className="absolute inset-[1px]"
                         style={{
                             background: 'linear-gradient(145deg, #0a1428 0%, #050812 100%)',
-                            clipPath: 'polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)',
+                            clipPath: 'polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px)',
                         }}
                     />
 
                     {/* Content */}
-                    <div className="relative p-8 md:p-10">
-                        {/* Corner accents */}
-                        <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-red-500/50" style={{ transform: 'translate(-1px, -1px)' }} />
-                        <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-cyan-500/50" style={{ transform: 'translate(1px, -1px)' }} />
-                        <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-cyan-500/50" style={{ transform: 'translate(-1px, 1px)' }} />
-                        <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-red-500/50" style={{ transform: 'translate(1px, 1px)' }} />
+                    <div className="relative p-5 sm:p-6 md:p-8 lg:p-10">
+                        {/* Corner accents - smaller on mobile */}
+                        <div className="absolute top-0 left-0 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 border-l-2 border-t-2 border-red-500/50" style={{ transform: 'translate(-1px, -1px)' }} />
+                        <div className="absolute top-0 right-0 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 border-r-2 border-t-2 border-cyan-500/50" style={{ transform: 'translate(1px, -1px)' }} />
+                        <div className="absolute bottom-0 left-0 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 border-l-2 border-b-2 border-cyan-500/50" style={{ transform: 'translate(-1px, 1px)' }} />
+                        <div className="absolute bottom-0 right-0 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 border-r-2 border-b-2 border-red-500/50" style={{ transform: 'translate(1px, 1px)' }} />
 
                         {/* Status badge */}
-                        <div className="flex justify-center mb-6">
+                        <div className="flex justify-center mb-4 sm:mb-6">
                             <div
-                                className={`inline-flex items-center gap-2 px-4 py-1.5 text-xs font-bold uppercase tracking-widest ${isLive
+                                className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1 sm:py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-wider sm:tracking-widest ${isLive
                                     ? 'bg-green-500/20 text-green-400 border border-green-500/50'
                                     : 'bg-red-500/20 text-red-400 border border-red-500/50'
                                     }`}
-                                style={{ clipPath: 'polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)' }}
+                                style={{ clipPath: 'polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)' }}
                             >
-                                <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-red-400 animate-pulse'}`} />
+                                <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${isLive ? 'bg-green-400 animate-pulse' : 'bg-red-400 animate-pulse'}`} />
                                 <GlitchText text={isLive ? 'LIVE NOW' : 'STARTING SOON'} />
                             </div>
                         </div>
 
                         {/* Title */}
                         <div className="text-center mb-2">
-                            <div className="flex items-center justify-center gap-2 mb-2">
-                                <div className="w-12 h-[2px] bg-gradient-to-r from-transparent to-red-500" />
-                                <Trophy className="w-6 h-6 text-yellow-500" />
-                                <div className="w-12 h-[2px] bg-gradient-to-l from-transparent to-cyan-500" />
+                            <div className="flex items-center justify-center gap-1.5 sm:gap-2 mb-2">
+                                <div className="w-8 sm:w-10 md:w-12 h-[2px] bg-gradient-to-r from-transparent to-red-500" />
+                                <Trophy className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-500" />
+                                <div className="w-8 sm:w-10 md:w-12 h-[2px] bg-gradient-to-l from-transparent to-cyan-500" />
                             </div>
                             <h1
-                                className="glitch-title text-3xl md:text-4xl font-black text-white uppercase tracking-tight"
+                                className="glitch-title text-2xl sm:text-3xl md:text-4xl font-black text-white uppercase tracking-tight"
                                 data-text="#NexusCodeSprint"
                             >
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-white to-cyan-400">
                                     #NexusCodeSprint
                                 </span>
                             </h1>
-                            <p className="text-lg text-cyan-400 font-semibold mt-1">
-                                <GlitchText text="LEADERBOARD" className="tracking-widest" />
+                            <p className="text-base sm:text-lg text-cyan-400 font-semibold mt-1">
+                                <GlitchText text="LEADERBOARD" className="tracking-wider sm:tracking-widest" />
                             </p>
                         </div>
 
                         {/* Description */}
-                        <p className="text-center text-gray-400 text-sm md:text-base mb-8 max-w-md mx-auto leading-relaxed">
+                        <p className="text-center text-gray-400 text-xs sm:text-sm md:text-base mb-6 sm:mb-8 max-w-md mx-auto leading-relaxed px-2">
                             The 30-day Git challenge is almost live. Track your rank, streaks, and daily progress once we launch.
                         </p>
 
                         {/* Countdown Timer */}
-                        <div className="mb-8">
-                            <div className="grid grid-cols-4 gap-2 md:gap-4">
+                        <div className="mb-6 sm:mb-8">
+                            <div className="grid grid-cols-4 gap-1.5 sm:gap-2 md:gap-4">
                                 {[
                                     { value: timeLeft.days, label: 'DAYS' },
-                                    { value: timeLeft.hours, label: 'HOURS' },
-                                    { value: timeLeft.minutes, label: 'MINS' },
-                                    { value: timeLeft.seconds, label: 'SECS' },
+                                    { value: timeLeft.hours, label: 'HRS' },
+                                    { value: timeLeft.minutes, label: 'MIN' },
+                                    { value: timeLeft.seconds, label: 'SEC' },
                                 ].map((unit, idx) => (
                                     <div key={unit.label} className="relative">
                                         <div
-                                            className="bg-slate-900/80 border border-cyan-500/30 p-3 md:p-4 text-center"
-                                            style={{ clipPath: 'polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%)' }}
+                                            className="bg-slate-900/80 border border-cyan-500/30 p-2 sm:p-3 md:p-4 text-center"
+                                            style={{ clipPath: 'polygon(6px 0, 100% 0, calc(100% - 6px) 100%, 0 100%)' }}
                                         >
-                                            <div className="text-2xl md:text-4xl font-mono font-black text-white">
+                                            <div className="text-xl sm:text-2xl md:text-4xl font-mono font-black text-white">
                                                 {String(unit.value).padStart(2, '0')}
                                             </div>
-                                            <div className="text-[10px] md:text-xs text-cyan-400 font-bold tracking-wider mt-1">
+                                            <div className="text-[8px] sm:text-[10px] md:text-xs text-cyan-400 font-bold tracking-wider mt-0.5 sm:mt-1">
                                                 {unit.label}
                                             </div>
                                         </div>
-                                        {/* Separator */}
+                                        {/* Separator - hidden on very small screens */}
                                         {idx < 3 && (
-                                            <div className="absolute top-1/2 -right-1 md:-right-2 transform -translate-y-1/2 text-red-500 font-bold text-lg md:text-2xl">
+                                            <div className="absolute top-1/2 -right-0.5 sm:-right-1 md:-right-2 transform -translate-y-1/2 text-red-500 font-bold text-sm sm:text-lg md:text-2xl">
                                                 :
                                             </div>
                                         )}
@@ -442,30 +442,30 @@ function CodeSprintPage() {
                                 href={registrationFormUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group relative inline-flex items-center gap-2 px-8 py-4 font-bold uppercase tracking-wider text-white transition-all duration-300 hover:scale-105"
+                                className="group relative inline-flex items-center gap-1.5 sm:gap-2 px-5 sm:px-6 md:px-8 py-3 sm:py-3.5 md:py-4 text-sm sm:text-base font-bold uppercase tracking-wider text-white transition-all duration-300 hover:scale-105 active:scale-100"
                                 style={{
                                     background: isLive
                                         ? 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)'
                                         : 'linear-gradient(135deg, #ff4655 0%, #bd3341 100%)',
-                                    clipPath: 'polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)',
+                                    clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)',
                                 }}
                             >
                                 {/* Glow effect */}
                                 <div
-                                    className={`absolute inset-0 blur-xl opacity-50 group-hover:opacity-75 transition-opacity ${isLive ? 'bg-green-500' : 'bg-red-500'}`}
-                                    style={{ clipPath: 'polygon(12px 0, 100% 0, calc(100% - 12px) 100%, 0 100%)' }}
+                                    className={`absolute inset-0 blur-lg sm:blur-xl opacity-50 group-hover:opacity-75 transition-opacity ${isLive ? 'bg-green-500' : 'bg-red-500'}`}
+                                    style={{ clipPath: 'polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%)' }}
                                 />
-                                <span className="relative z-10 flex items-center gap-2">
+                                <span className="relative z-10 flex items-center gap-1.5 sm:gap-2">
                                     {isLive ? (
                                         <>
-                                            <Target className="w-5 h-5" />
+                                            <Target className="w-4 h-4 sm:w-5 sm:h-5" />
                                             <GlitchText text="VIEW LEADERBOARD" />
                                         </>
                                     ) : (
                                         <>
-                                            <Zap className="w-5 h-5" />
+                                            <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
                                             <GlitchText text="REGISTER NOW" />
-                                            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                            <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
                                         </>
                                     )}
                                 </span>
@@ -482,12 +482,12 @@ function CodeSprintPage() {
                 </div>
 
                 {/* Bottom decorative element */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
-                    <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-red-500/50" />
-                    <div className="text-gray-600 text-xs font-mono uppercase tracking-widest">
+                <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 flex items-center gap-2 sm:gap-4">
+                    <div className="w-8 sm:w-12 md:w-16 h-[1px] bg-gradient-to-r from-transparent to-red-500/50" />
+                    <div className="text-gray-600 text-[10px] sm:text-xs font-mono uppercase tracking-widest whitespace-nowrap">
                         <GlitchText text="NEXUS // 2026" />
                     </div>
-                    <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-cyan-500/50" />
+                    <div className="w-8 sm:w-12 md:w-16 h-[1px] bg-gradient-to-l from-transparent to-cyan-500/50" />
                 </div>
             </div>
         </div>
