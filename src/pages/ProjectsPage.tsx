@@ -176,7 +176,7 @@ function ProjectsPage() {
                                     <h3 className="text-xl font-medium text-gray-900 mb-2">Have Your Own Project Idea?</h3>
                                     <p className="text-gray-600">
                                         Don't see a project that fits you? We welcome innovative ideas from students!
-                                        Propose your own AI/ML project and we'll help you bring it to life.
+                                        Propose your own project and we'll help you bring it to life.
                                     </p>
                                 </div>
                             </div>

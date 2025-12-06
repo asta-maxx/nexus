@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import Navbar from './components/Navbar';
@@ -14,29 +14,60 @@ import CodeSprintPage from './pages/CodeSprintPage';
 import NeuroComputingPage from './pages/NeuroComputingPage';
 import MediaPage from './pages/MediaPage';
 
+// Map routes to page names for the loader
+const routeToPageName: Record<string, string> = {
+  '/': 'HOME',
+  '/projects': 'PROJECTS',
+  '/events': 'EVENTS',
+  '/about': 'ABOUT',
+  '/team': 'TEAM',
+  '/apply': 'APPLY',
+  '/codesprint': 'CODE_SPRINT',
+  '/neuro-computing': 'NEURO_COMPUTING',
+  '/media': 'MEDIA',
+};
+
 function App() {
-  const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [showLoader, setShowLoader] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const location = useLocation();
+  const isFirstRender = useRef(true);
+  const previousPath = useRef(location.pathname);
 
-  // Check if this is a first-time visit in this session
+  // Get current page name from route
+  const currentPageName = useMemo(() => {
+    return routeToPageName[location.pathname] || 'HOME';
+  }, [location.pathname]);
+
+  // Handle page transitions - show loader on route change
   useEffect(() => {
-    const hasLoaded = sessionStorage.getItem('nexus_loaded');
-    if (hasLoaded) {
-      setIsFirstLoad(false);
-      setShowContent(true);
+    // Skip the initial render
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
     }
-  }, []);
+
+    // Only trigger if path actually changed
+    if (previousPath.current !== location.pathname) {
+      previousPath.current = location.pathname;
+
+      // Show loader and hide content
+      setShowContent(false);
+      setShowLoader(true);
+
+      // Scroll to top
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname]);
 
   const handleLoadingFinish = () => {
-    sessionStorage.setItem('nexus_loaded', 'true');
-    setIsFirstLoad(false);
+    setShowLoader(false);
     setShowContent(true);
   };
 
-  // Show loader on first visit
-  if (isFirstLoad) {
-    return <InitialLoader onFinish={handleLoadingFinish} />;
+  // Show loader
+  if (showLoader) {
+    return <InitialLoader onFinish={handleLoadingFinish} pageName={currentPageName} />;
   }
 
   return (
@@ -46,7 +77,7 @@ function App() {
           key="app-content"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
+          transition={{ duration: 0.4, ease: 'easeOut' }}
           className="min-h-screen bg-white flex flex-col"
         >
           <Navbar />
@@ -73,3 +104,5 @@ function App() {
 }
 
 export default App;
+
+

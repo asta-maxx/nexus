@@ -47,7 +47,7 @@ function TeamsPage() {
             bio: 'Passionate about developing computer vision and deep learning models with a keen interest in solving real-world visual computing challenges.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/joy-james-swamy/',
         },
         {
             name: 'Lizania Dew K',
@@ -58,7 +58,7 @@ function TeamsPage() {
             bio: 'Organized and detail-oriented, with strengths in documentation and computer vision applications across different domains.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/lizania-dew-k-549821294/',
         },
         {
             name: 'Rojal Dhass',
@@ -69,7 +69,7 @@ function TeamsPage() {
             bio: 'A full-stack developer skilled in modern JavaScript technologies, experienced in building scalable web applications from end to end.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/rojal-dhass/',
         },
         {
             name: 'Nikilkumar',
@@ -78,9 +78,9 @@ function TeamsPage() {
             image: '/images/core/Team/5.jpg',
             skills: ['Photography', 'Videography', 'Adobe Suite'],
             bio: 'Creative visual specialist with professional experience in photography, videography, and digital content creation.',
-            portfolio: '#',
+            portfolio: 'sites.google.com/view/cinelinestudio',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://github.com/nikilkumarm',
         },
         {
             name: 'David Paul P',
@@ -91,7 +91,7 @@ function TeamsPage() {
             bio: 'Data-driven problem solver with a focus on applied machine learning, model development, and efficient workflow execution.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/david-paul-p-a4a733375/',
         },
         {
             name: 'Jason B',
@@ -102,7 +102,7 @@ function TeamsPage() {
             bio: 'Technically adept in AI engineering, specializing in computer vision and ML pipeline workflows using modern deep learning tools.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/jason-balamurgan/',
         },
         {
             name: 'Choppa Sai Akshitha',
@@ -113,7 +113,7 @@ function TeamsPage() {
             bio: 'Combines technical insight with creative design, focusing on user-centric solutions and intuitive visual problem-solving.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/akshithachoppa09/',
         },
         {
             name: 'Priya Dharshini S',
@@ -124,7 +124,7 @@ function TeamsPage() {
             bio: 'Strong communicator with experience in planning structured activities and exploring deep learning concepts and applications.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/priya-dharshini-s26/',
         },
         {
             name: 'Dhanya Shriee S',
@@ -135,7 +135,7 @@ function TeamsPage() {
             bio: 'Focused on front-end development and fostering engagement, with a passion for building interactive user experiences.',
             portfolio: '#',
             github: '#',
-            linkedin: '#',
+            linkedin: 'https://www.linkedin.com/in/dhanyashriee-s-11b333288/',
         },
     ];
 
@@ -306,22 +306,28 @@ function TeamsPage() {
                                         ))}
                                     </div>
 
-                                    <div className="flex gap-2 md:gap-3 w-full pt-4 border-t border-gray-100">
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); handleCardClick(member.github); }}
-                                            className="flex-1 flex items-center justify-center gap-1.5 md:gap-2 py-2 md:py-2.5 rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all text-xs md:text-sm font-medium"
-                                        >
-                                            <Github className="w-4 h-4" />
-                                            GitHub
-                                        </button>
-                                        <button
-                                            onClick={(e) => { e.stopPropagation(); handleCardClick(member.linkedin); }}
-                                            className="flex-1 flex items-center justify-center gap-1.5 md:gap-2 py-2 md:py-2.5 rounded-xl bg-[#0077B5] text-white hover:bg-[#006399] transition-all text-xs md:text-sm font-medium"
-                                        >
-                                            <Linkedin className="w-4 h-4" />
-                                            LinkedIn
-                                        </button>
-                                    </div>
+                                    {(member.github && member.github !== '#') || (member.linkedin && member.linkedin !== '#') ? (
+                                        <div className="flex gap-2 md:gap-3 w-full pt-4 border-t border-gray-100">
+                                            {member.github && member.github !== '#' && (
+                                                <button
+                                                    onClick={(e) => { e.stopPropagation(); handleCardClick(member.github); }}
+                                                    className="flex-1 flex items-center justify-center gap-1.5 md:gap-2 py-2 md:py-2.5 rounded-xl bg-gray-900 text-white hover:bg-gray-800 transition-all text-xs md:text-sm font-medium"
+                                                >
+                                                    <Github className="w-4 h-4" />
+                                                    GitHub
+                                                </button>
+                                            )}
+                                            {member.linkedin && member.linkedin !== '#' && (
+                                                <button
+                                                    onClick={(e) => { e.stopPropagation(); handleCardClick(member.linkedin); }}
+                                                    className="flex-1 flex items-center justify-center gap-1.5 md:gap-2 py-2 md:py-2.5 rounded-xl bg-[#0077B5] text-white hover:bg-[#006399] transition-all text-xs md:text-sm font-medium"
+                                                >
+                                                    <Linkedin className="w-4 h-4" />
+                                                    LinkedIn
+                                                </button>
+                                            )}
+                                        </div>
+                                    ) : null}
                                 </div>
                             </div>
                         ))}

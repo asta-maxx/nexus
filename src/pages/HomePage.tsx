@@ -53,7 +53,7 @@ function HomePage() {
 
     const stats = [
         { value: '8+', label: 'Active Projects', icon: Rocket },
-        { value: '50+', label: 'Student Members', icon: Users },
+        { value: '15+', label: 'Student Members', icon: Users },
         { value: '10+', label: 'Industry Mentors', icon: TrendingUp },
         { value: '∞', label: 'Possibilities', icon: Globe },
     ];
